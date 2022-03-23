@@ -1,0 +1,66 @@
+<html>
+<head>
+    <title>事件显示与否</title>
+    <style type="text/css">
+        .active { border: 1px solid red;}
+    </style>
+</head>
+
+<body>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="vue.js"></script>
+
+    <div id="app">
+        <!-- v-show切换元素显示（修改元素的display） -->
+        <input type="button" value="v-show切换" @click="changeShow" /><br />
+        <img src="logo.gif" v-show="isShow" />
+        
+        <!-- v-if切换元素显示（操纵dom元素） -->
+        <input type="button" value="v-if切换" @click="toggleShow" /><br />
+        <p v-if="flag">呜呜呜，v-if来操纵我的dom元素了！</p>
+
+        <!-- v-bind切换元素显示（设置元素的属性） -->
+        <img v-bind:src="imgSrc" alt="" v-bind:title="imgTitle+'！！！'"
+            :class="isActive?'active':''" @click="toggleActive" />
+        <img v-bind:src="imgSrc" alt="" v-bind:title="imgTitle+'！！！'"
+            :class="{active:isActive}" @click="toggleActive" />
+
+        <p @click="doIt('a','b')">点击该文字，控制台会打印一串文字哦！</p>
+        <input type="text" @keyup.enter="sayHi" v-model="name" />
+
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                isShow: false,
+                age: 20,
+                flag: false,
+                imgSrc: "logo.gif",  // 当前目录下的log.gif文件
+                imgTitle: '哈哈',
+                isActive: false,
+                name: ''
+            },
+            methods: {
+                changeShow: function() {
+                    this.isShow = !this.isShow;
+                },
+                toggleShow: function() {
+                    this.flag = !this.flag
+                },
+                toggleActive: function() {
+                    this.isActive = !this.isActive;
+                },
+                doIt: function(p1, p2) {
+                    console.log("哈哈哈，传进了两个参数：", p1, p2);
+                },
+                sayHi: function() {
+                    alert(this.name + "，欢迎来到我的网站！");
+                }
+            }
+        })
+    </script>
+
+</body>
+</html>

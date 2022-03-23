@@ -1,0 +1,64 @@
+<htm>
+<head>
+    <title>网络应用：axios</title>
+</head>
+
+<body>
+    <script src="vue.js"></script>
+    <script src="axios.min.js"></script>
+    <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+
+    <input type="button" class="get" value="get请求" />
+    <input type="button" class="post" value="post请求" />
+
+    <p></p>
+
+    <div id="app">
+        <input type="button" @click="getJoke" value="get获取笑话" /><br />
+        <label>{{ joke }}</label>
+    </div>
+
+    <!-- 存放axios的js内容 -->
+    <script>
+        document.querySelector(".get").onclick = function() {
+            axios.get("https://autumnfish.cn/api/joke/list?num=6").
+            then(function(resp) {
+                console.log(resp.data);
+            }, function(err) {
+                console.log("失败了！",err);
+            })
+        }
+        
+        document.querySelector(".post").onclick = function() {
+            axios.post("https://autumnfish.cn/api/user/reg",
+            {username: "文双双双"}).
+            then(function(resp) {
+                console.log(resp);
+            }, function(err) {
+                console.log("失败了", err)
+            })
+        }
+    </script>
+
+    <!-- 存放 vue 的js内容 -->
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                joke: "一个很好笑的笑话！"
+            },
+            methods: {
+                getJoke: function() {
+                    that = this;
+                    axios.get("https://autumnfish.cn/api/joke").
+                    then(function(res) {
+                        that.joke = res.data;
+                    }, function(err) {
+                        consoel.log(err);
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+</htm>

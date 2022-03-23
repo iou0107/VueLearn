@@ -1,0 +1,41 @@
+<html>
+<head>
+    <title>本地应用1-内容绑定 事件绑定</title>
+</head>
+    
+<body>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+    <div id="app">
+        <h2 v-text="message+'！'">傻傻</h2>
+        <h3>傻傻{{ message + "双喜" }}！</h3>
+        <p v-html="content"></p>
+
+        <input type="button" value="单击按钮" @click="doIt"/>
+        <input type="button" value="双击事件" @dblclick="doIt"/>
+
+        <h3 @click="changeFood">{{ food }}</h3>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                message: "哈哈哈",
+                content: "<a href='#'>欢迎来到我的个人网站</a>",
+                food: "西兰花炒蛋"
+            },
+            methods: {
+                doIt: function() {
+                    alert("做IT。。。");
+                },
+                changeFood: function() {
+                    this.food += "好！";
+                }
+            }
+        })
+    </script>
+
+</body>
+</html>

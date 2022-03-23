@@ -1,0 +1,50 @@
+<html>
+<head>
+    <title>案例3：记事本</title>
+</head>
+
+<body>
+    <script src="vue.js"></script>
+
+    <div id="app">
+        <h2>小红的记事本</h2>
+        <div>
+            <input type="text" @keyup.enter="add" v-model="todo" />
+            <ul>
+                <li v-for="(item,index) in todoList">
+                    {{index+1}} {{ item }}
+                    <label @click="del(index)">删除</label>
+                </li>
+            </ul>
+            <!-- 由于清空操作不经常使用，不用考虑性能，因此用v-if -->
+            <div v-if="todoList.length > 0">
+                <label>{{todoList.length}} item left</label>
+                <label @click="clear">Clear</label>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                todoList: ["吃饭饭","睡觉觉","打豆豆"],
+                todo: ""
+            },
+            methods: {
+                clear: function() {
+                    this.todoList = [];
+                    // this.todoList.length = 0;    // 这样无法清空
+                },
+                add: function() {
+                    this.todoList.push(this.todo);
+                },
+                del: function(index) {
+                    console.log(index);
+                    this.todoList.splice(index,1);
+                }
+            }
+        })
+    </script>
+</body>
+</html>

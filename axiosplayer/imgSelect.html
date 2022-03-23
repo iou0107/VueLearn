@@ -1,0 +1,46 @@
+<html>
+<head>
+    <title>案例2：图片切换</title>
+</head>
+
+<body>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+    <div id="app">
+        <img src="images/prev.png" v-show="index!=0" @click="prev" />
+        <img :src="imgArray[index]" />
+        <img src="images/next.png" v-show="index<imgArray.length-1" @click="next" />
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                imgArray: [
+                    "images/00.jpg",
+                    "images/01.jpg",
+                    "images/02.jpg",
+                    "images/03.jpg",
+                    "images/04.jpg",
+                    "images/05.jpg",
+                    "images/06.jpg",
+                    "images/07.jpg",
+                    "images/08.jpg",
+                    "images/09.jpg",
+                    "images/10.jpg"
+                ],
+                index: 0
+            },
+            methods: {
+                prev: function() {
+                    this.index --;
+                },
+                next: function() {
+                    this.index ++;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

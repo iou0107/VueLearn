@@ -1,0 +1,78 @@
+<html>
+<head>
+    <title>案例1：计数器</title>
+    <style type="text/css">
+        #app {
+            width: 480px;
+            height: 100px;
+            margin: 200px auto;
+        }
+        .input_num {
+            margin-top: 20px;
+            height: 100%;
+            display: flex;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 4px black;
+        }
+        .input_num button {
+            width: 150px;
+            height: 100%;
+            font-size: 40px;
+            color: #ad2a27;
+            cursor: pointer;
+            border: none;
+            outline: none;
+            background-color:rgba(0, 0, 0, 0);
+        }
+        .input_num span {
+            height: 100%;
+            font-size: 40px;
+            flex: 1;
+            text-align: center;
+            line-height: 80px;
+            font-family:auto;
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+    <div id="app">
+        <div class="input_num">
+            <button @click="sub">-</button>
+            <span>{{ counter }}</span>
+            <button @click="add">+</button>
+        </div>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                counter: 0
+            },
+            methods: {
+                sub: function() {
+                    if(this.counter == 0) {
+                        alert("别点了，到底了！");
+                    }else {
+                        this.counter --;
+                    }
+                },
+                add: function() {
+                    if(this.counter == 10) {
+                        alert("别点了，已经是最大值了！");
+                    }else{
+                        this.counter ++;
+                    }
+                }
+            }
+        })
+    </script>
+
+</body>
+</html>

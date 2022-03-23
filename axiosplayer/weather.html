@@ -1,0 +1,58 @@
+<html>
+<head>
+    <title>案例4：天知道</title>
+</head>
+
+<body>
+    <script src="axios.min.js"></script>
+    <script src="vue.js"></script>
+
+    <div id="app">
+        <img src="images/logo2.png" /><br /><p></p>
+        <input type="text" v-model="city" />
+        <input type="button" value="查询" @click="getWeather" /><br />
+        <label @click="changeCity('广州')">广州</label>
+        <label @click="changeCity('长沙')">长沙</label>
+        <label @click="changeCity('安化')">安化</label>
+        <label @click="changeCity('厦门')">厦门</label>
+        <p></p><p></p>
+        <div>
+            结果显示区：
+            <ul>
+                <li v-for="(item,index) in list">
+                    天气：{{ item.type }}
+                    气温：{{ item.low }} ~ {{ item.high }}
+                    日期：{{ item.date }}
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                city: "",
+                list: []
+            },
+            methods: {
+                getWeather: function() {
+                    var url = 'http://wthrcdn.etouch.cn/weather_mini?city=' + this.city;
+                    var that = this;
+                    axios.get(url).then(function(res) {
+                        that.list = res.data.data.forecast;
+                    }, function(err) {
+                        console.log("请求失败：", err);
+                    })
+                },
+                changeCity: function(city) {
+                    this.city = city;
+                    this.getWeather();
+                }
+            }
+        })
+    </script>
+
+</body>
+
+</html>

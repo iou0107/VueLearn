@@ -1,0 +1,51 @@
+<html>
+<head>
+    <title>列表循环</title>
+</head>
+
+<body>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>  
+
+    <div id="app">
+        <ul>数值型列表：
+            <li v-for="item in numList">{{ item }}</li>
+        </ul>
+
+        <input type="button" value="添加数据" @click="add" />
+        <button @click="remove">移除数据</button>
+
+        <ul>对象型列表
+            <!-- 备注：item和index的顺序不可交换 -->
+            <li v-for="(item,index) in objList">
+                <!-- {{ index+1 }} {{ item }} -->
+                {{item.no}} ： {{item.name}}
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                numList: [1,2,3,4,5],
+                objList: [
+                    {name: "张三", no: "0001"},
+                    {name: "李四", no: "0002"},
+                    {name: "王五", no: "0003"},
+                    {name: "赵六", no: "0004"},
+                    {name: "陈七", no: "0005"}
+                ]
+            },
+            methods: {
+                add:function(){
+                    this.objList.push({name: "双红", no: "0006"});
+                },
+                remove:function(){
+                    this.objList.shift();
+                }
+            }
+        })
+    </script>
+</body>
+</html>
